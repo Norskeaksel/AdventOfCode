@@ -1,0 +1,8 @@
+set clipboard=unnamedplus
+imap jj <Esc>
+imap kk <Esc>
+map <space>p "_diwP
+nnoremap <space>r :source ~/.ideavimrc<CR>
+map <space># diwF#bhviwpf#lp
+map <space>n :set rnu<CR> :set number<CR>
+map <space>m :set nornu<CR>

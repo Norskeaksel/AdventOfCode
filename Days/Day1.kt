@@ -35,7 +35,7 @@ fun part2(input: List<Int>):Int{
 }
 
 fun main(args: Array<String>) {
-    val path = "src/inputFiles/d1p1.txt"
+    val path = "src/inputFiles/d1.txt"
     val input = readFileIntLns(path)
     val ans1 = part1(input)
     val ans2 = part2(input)
