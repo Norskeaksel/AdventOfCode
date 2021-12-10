@@ -1,6 +1,6 @@
 import java.lang.Math.max
 
-fun _printBoard(board:MutableList<List<Int>>, name:String){
+fun _printBoard(board: MutableList<List<Int>>, name: String) {
     println(name)
     board.forEach { println(it) }
     println()
@@ -29,12 +29,12 @@ fun _boards(input: List<String>): MutableList<MutableList<List<Int>>> {
     return boards
 }
 
-fun _placeNumber(boards: MutableList<MutableList<List<Int>>>, number: Int): MutableList<MutableList<List<Int>>>{
-    for ((boardNr,board) in boards.withIndex()){
-        for((rowNr,row) in board.withIndex()){
+fun _placeNumber(boards: MutableList<MutableList<List<Int>>>, number: Int): MutableList<MutableList<List<Int>>> {
+    for ((boardNr, board) in boards.withIndex()) {
+        for ((rowNr, row) in board.withIndex()) {
             board[rowNr] = row.map { if (it == number) -1 else it }
         }
-        boards[boardNr]=board
+        boards[boardNr] = board
     }
     return boards
 }
@@ -56,36 +56,56 @@ fun _gameOver(boards: MutableList<MutableList<List<Int>>>): MutableList<List<Int
     return null
 }
 
-fun _finalScore(board: MutableList<List<Int>>, number:Int): Int{
-    var score=0
-    for(rowNr in 0 until board[0].size){
-        for(colNr in 0 until board.size){
-            score+=max(board[rowNr][colNr],0)
+fun _finalScore(board: MutableList<List<Int>>, number: Int): Int {
+    var score = 0
+    for (rowNr in 0 until board[0].size) {
+        for (colNr in 0 until board.size) {
+            score += max(board[rowNr][colNr], 0)
         }
     }
-    return score*number
+    return score * number
 }
 
 fun part1(input: List<String>): Int {
     //input.forEach{println(it)}
     val draws = input[0].split(",").map { it.toInt() }
     var boards = _boards(input)
-    var c=1
+    var c = 1
     //boards.forEach{_printBoard(it,"Board Nr${c++}")}
-    for(number in draws){
-        //boards = _placeNumber(boards, number)
+    for (number in draws) {
+        boards = _placeNumber(boards, number)
         val winner = _gameOver(boards)
-            if(winner != null){
-                //_printBoard(winner,"Winner")
-                return _finalScore(winner,number)
-            }
+        if (winner != null) {
+            //_printBoard(winner,"Winner")
+            return _finalScore(winner, number)
         }
+    }
     return -1
 }
 
 
-fun part2(input: List<String>): String {
-    return "c"
+fun part2(input: List<String>): Int {
+    //input.forEach{println(it)}
+    val draws = input[0].split(",").map { it.toInt() }
+    var boards = _boards(input)
+    var c = 1
+    var winner: MutableList<List<Int>>? = null
+    //boards.forEach{_printBoard(it,"Board Nr${c++}")}
+    for (number in draws) {
+        boards = _placeNumber(boards, number)
+        winner = _gameOver(boards)
+        while (winner != null) {
+            if (boards.size == 1) {
+                //_printBoard(winner,"Winner")
+                return _finalScore(boards[0], number)
+            }
+            boards.remove(winner)
+            winner = _gameOver(boards)
+        }
+
+    }
+    return -1
+
 }
 
 
@@ -95,5 +115,5 @@ fun main(args: Array<String>) {
     val ans1 = part1(input)
     println("Part 1 = $ans1")
     val ans2 = part2(input)
-    //println("Part 2 = $ans2")
+    println("Part 2 = $ans2")
 }
