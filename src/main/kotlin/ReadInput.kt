@@ -14,3 +14,15 @@ fun readLineByLine(fileName: String): List<String>{
     inputStream.bufferedReader().forEachLine { lineList.add(it) }
     return lineList
 }
+fun readGrid(fileName: String): MutableList<MutableList<Int>>{
+    val input = readFileLns(fileName)
+    val grid = mutableListOf<MutableList<Int>>()
+    input.forEach { grid.add(it.map { it.digitToInt() }.toMutableList()) }
+    return grid
+}
+
+fun copy2Dlist(input: MutableList<MutableList<Int>>): MutableList<MutableList<Int>> {
+    val copy = mutableListOf<MutableList<Int>>()
+    input.forEach { copy.add(it.toMutableList()) }
+    return copy
+}

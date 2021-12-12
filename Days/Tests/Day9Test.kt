@@ -1,4 +1,4 @@
-import junit.framework.TestCase
+/*import junit.framework.TestCase
 import org.junit.Test
 
 class Day9Test : TestCase() {
@@ -10,4 +10,4 @@ class Day9Test : TestCase() {
         val expected = 15
         assertEquals(expected, part1(testinput))
     }
-}
+}*/
