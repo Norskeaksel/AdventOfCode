@@ -52,9 +52,9 @@ fun part2(input: List<String>): Int {
         val maxY = max(y1,y2)
         val minY = min(y1,y2)
         val xSteps = maxX-minX
-        if(xSteps == maxY-minY && xSteps != 0){
+        if(xSteps == maxY-minY){
             var i=0
-            while(i < xSteps){
+            while(i <= xSteps){
                 val xDirection = if(x2-x1>0) 1 else -1
                 val yDirection = if(y2-y1>0) 1 else -1
                 val xy = Pair(x1+i*xDirection,y1+i*yDirection)
@@ -65,7 +65,7 @@ fun part2(input: List<String>): Int {
                     //println("$x $y")
                     intersections++
                     points[xy]=2
-                    println(xy)
+                    //println(xy)
                 }
                 i++
             }
@@ -80,7 +80,7 @@ fun part2(input: List<String>): Int {
                     points[xy]=1
                 }
                 else if(points[xy]==1){
-                    println("$x $y")
+                    //println("$x $y")
                     intersections++
                     points[xy]=2
 
