@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AdventOfCode.iml" filepath="$PROJECT_DIR$/AdventOfCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../_2019/_2019/_2019.iml" filepath="$PROJECT_DIR$/../_2019/_2019/_2019.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_2020/_2020.iml" filepath="$PROJECT_DIR$/_2020/_2020.iml" />
+      <module fileurl="file://$PROJECT_DIR$/_2022/_2022.iml" filepath="$PROJECT_DIR$/_2022/_2022.iml" />
+    </modules>
+  </component>
+</project>
