@@ -1,6 +1,6 @@
 import junit.framework.TestCase
 
-class DayKtTest : TestCase() {
+class Day1KtTest : TestCase() {
     val input = """ 
 1000
 2000
