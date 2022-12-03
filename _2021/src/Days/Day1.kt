@@ -3,9 +3,7 @@ package Days
 import java.io.File
 import kotlin.math.max
 
-fun countIncreases(input: List<Int>):Int{
-    return input.windowed(2).count{(a,b) -> a<b}
-}
+fun countIncreases(input: List<Int>) = input.windowed(2).count{(a,b) -> a<b}
 
 fun countSlidingWindowIncreases(input: List<Int>):Int{
     return input.windowed(3).windowed(2).count { (a,b) -> a.sum() <b.sum() }
