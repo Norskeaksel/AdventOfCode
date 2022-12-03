@@ -2,14 +2,7 @@ import java.io.File
 import kotlin.math.max
 
 fun part1(input: List<Int>):Int{
-    var counter = 0
-    for ((index, value) in input.withIndex()) {
-        if(index>0){
-            if(value>input[index-1])
-                counter++
-        }
-    }
-    return counter
+    return input.count{a,b -> a>b}
 }
 
 fun _3sumList(input: List<Int>): List<Int>{
