@@ -2,14 +2,12 @@ import junit.framework.TestCase
 
 class DayKtTest : TestCase() {
     val input = """ 
-       BFFFBBFRRR
-       FFFBBBFRRR
-       BBFFBBFRLL
+        
     """.trimIndent().lines()
 
     fun testSolve1() {
         val ans = solve1(input)
-        assertEquals(820, ans)
+        assertEquals(Any(), ans)
     }
 
     fun testSolve2() {

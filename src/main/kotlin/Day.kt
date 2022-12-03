@@ -1,4 +1,4 @@
-fun solve1(input: List<String>){
+fun solve1(input: List<String>) {
 
 }
 

@@ -11,13 +11,6 @@ fun readDouble() = readString().toDouble()
 fun readDoubles() = readStrings().map { it.toDouble() }
 fun readFileLines(fileName:String) = File(fileName).readLines()
 fun readFileIntLines(fileName:String) = readFileLines(fileName).map{it.toInt()}
-fun readLineByLine(fileName: String): List<String>{
-    val inputStream: InputStream = File(fileName).inputStream()
-    val lineList = mutableListOf<String>()
-
-    inputStream.bufferedReader().forEachLine { lineList.add(it) }
-    return lineList
-}
 fun readGrid(fileName: String): MutableList<MutableList<Int>>{
     val input = readFileLines(fileName)
     val grid = mutableListOf<MutableList<Int>>()

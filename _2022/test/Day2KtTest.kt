@@ -2,16 +2,18 @@ import junit.framework.TestCase
 
 class DayKtTest : TestCase() {
     val input = """ 
-        
+A Y
+B X
+C Z
     """.trimIndent().lines()
 
     fun testSolve1() {
-        val ans = solve1(input)
-        assertEquals(Any(), ans)
+        val ans = rockPaper1(input)
+        assertEquals(15, ans)
     }
 
     fun testSolve2() {
-        val ans = solve2(input)
-        //assertEquals(-1,ans)
+        val ans = rockPaper2(input)
+        assertEquals(12,ans)
     }
 }
