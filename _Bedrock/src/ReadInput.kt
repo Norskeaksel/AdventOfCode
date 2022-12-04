@@ -2,6 +2,13 @@ package Days
 
 import java.io.File
 import java.io.InputStream
+import kotlin.math.*
+fun test(ans: Any, expected: Any) {
+    if (ans != expected) {
+        throw Exception("ans: $ans, Expected: $expected")
+    }
+}
+
 fun Boolean.toInt() = if (this) 1 else 0
 fun readString() = readLine()!!
 fun readStrings() = readString().split(" ")

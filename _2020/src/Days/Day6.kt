@@ -1,10 +1,6 @@
-fun test(ans: Any, expected: Any) {
-    if (ans != expected) {
-        throw Exception("ans: $ans, Expected: $expected")
-    }
-}
+package Days
 
-fun solve1(input: List<String>): Int {
+fun countSets(input: List<String>): Int {
     var ans=0
     val groupAns = mutableSetOf<Char>()
     input.forEach {
@@ -19,7 +15,7 @@ fun solve1(input: List<String>): Int {
     return ans
 }
 
-fun solve2(input: List<String>): Int {
+fun countSetIntersects(input: List<String>): Int {
     var ans=0
     val groupAns = mutableListOf<Set<Char>>()
     input.forEach {
@@ -37,10 +33,10 @@ fun solve2(input: List<String>): Int {
 
 fun main() {
     val inputTest = readFileLines("src/main/kotlin/TestDay")
-    test(solve1(inputTest), 11)
-    test(solve2(inputTest), 6)
+    test(countSets(inputTest), 11)
+    test(countSetIntersects(inputTest), 6)
 
     val input = readFileLines("src/main/kotlin/RealDay")
-    println("Part 1: ${solve1(input)}")
-    println("Part 2: ${solve2(input)}")
+    println("Part 1: ${countSets(input)}")
+    println("Part 2: ${countSetIntersects(input)}")
 }
