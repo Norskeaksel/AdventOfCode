@@ -1,5 +1,5 @@
-import Days.solve1
-import Days.solve2
+import Days.findCompleatIntevalOverlap
+import Days.findOverlappingInterval
 import junit.framework.TestCase
 
 class DayKt3Test : TestCase() {
@@ -15,12 +15,12 @@ CrZsJsPPZsGzwwsLwLmpwMDw
     """.trimIndent().lines()
 
     fun testSolve1() {
-        val ans = solve1(input)
+        val ans = findCompleatIntevalOverlap(input)
         assertEquals(157, ans)
     }
 
     fun testSolve2() {
-        val ans = solve2(input)
+        val ans = findOverlappingInterval(input)
         assertEquals(70,ans)
     }
 }

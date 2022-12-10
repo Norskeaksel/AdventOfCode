@@ -12,7 +12,7 @@ fun extracted(ansSet: Set<Char>): Int {
     return ans1
 }
 
-fun solve1(input: List<String>): Int {
+fun findCompleatIntevalOverlap(input: List<String>): Int {
     var ans = 0
     input.forEach {
         val ansSet = mutableSetOf<Char>()
@@ -31,7 +31,7 @@ fun solve1(input: List<String>): Int {
     return ans
 }
 
-fun solve2(input: List<String>): Int {
+fun findOverlappingInterval(input: List<String>): Int {
     var ans = 0
     var ansSet: Set<Char>
     val group = mutableListOf<String>()
@@ -54,6 +54,6 @@ fun solve2(input: List<String>): Int {
 
 fun main() {
     val input = readFileLines("src/main/kotlin/Day")
-    println(solve1(input))
-    println(solve2(input))
+    println(findCompleatIntevalOverlap(input))
+    println(findOverlappingInterval(input))
 }
