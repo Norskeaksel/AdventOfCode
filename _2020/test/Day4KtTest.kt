@@ -1,5 +1,5 @@
-import Days.countPassport
-import Days.countPassport2
+import days.countPassport
+import days.countPassport2
 import junit.framework.Assert
 import junit.framework.TestCase
 

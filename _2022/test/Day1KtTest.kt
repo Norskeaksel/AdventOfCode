@@ -19,12 +19,12 @@ class Day1KtTest : TestCase() {
 
     """.trimIndent().lines()
 
-    fun testSolve1() {
+    fun testDay1() {
         val ans = solve(input)[0]
         assertEquals(24000, ans)
     }
 
-    fun testSolve2() {
+    fun testDay2() {
         //val ans = solve2(input)
         //assertEquals(-1,ans)
     }

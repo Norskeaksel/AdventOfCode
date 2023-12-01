@@ -1,8 +1,8 @@
-package Days
+package days
 
 import java.io.File
 import java.io.InputStream
-import kotlin.math.*
+
 fun test(ans: Any, expected: Any) {
     if (ans != expected) {
         throw Exception("ans: $ans, Expected: $expected")

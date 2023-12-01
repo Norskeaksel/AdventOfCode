@@ -1,5 +1,5 @@
-import Days.findCompleatIntevalOverlap
-import Days.findOverlappingInterval
+import days.findCompleatIntevalOverlap
+import days.findOverlappingInterval
 import junit.framework.TestCase
 
 class DayKt3Test : TestCase() {

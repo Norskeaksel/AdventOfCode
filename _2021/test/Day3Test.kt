@@ -1,10 +1,8 @@
-import Days.mostCommonChars2
-import Days.readFileLines
+import days.mostCommonChars2
+import days.readFileLines
 import junit.framework.TestCase
-import org.junit.jupiter.api.Test
 
 class Day3Test : TestCase() {
-    @Test
     fun testD3p2() {
         val testPath = "test/testInputFiles/day3.txt"
         val testinput = readFileLines(testPath)

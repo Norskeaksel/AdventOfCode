@@ -1,5 +1,5 @@
-import Days.countTrees
-import Days.countTrees2
+import days.countTrees
+import days.countTrees2
 import junit.framework.Assert
 import junit.framework.TestCase
 
