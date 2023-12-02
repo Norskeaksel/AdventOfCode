@@ -6,11 +6,11 @@ class Day0KtTest : TestCase() {
     val input = """
     """.trimIndent().lines()
 
-    fun testDay1() {
+    fun test1Day0() {
         val ans = solve(input)
         assertEquals(1, ans)
     }
-    fun testDay2() {
+    fun test2Day0() {
         val ans = solve2(input)
         assertEquals(0, ans)
     }

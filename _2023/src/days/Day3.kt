@@ -1,10 +1,10 @@
 package days
 
-fun solve(input: List<String>): Int {
+fun day3(input: List<String>): Int {
     return 0
 }
 
-fun solve2(input: List<String>): Int {
+fun day32(input: List<String>): Int {
     return 0
 }
 
