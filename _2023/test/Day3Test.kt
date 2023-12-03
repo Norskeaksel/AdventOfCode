@@ -1,17 +1,28 @@
-import days.day3
-import days.day32
+import days.numbersConnectedToSymbol
+import days.startWith2Numbers
 import junit.framework.TestCase
 
 class Day3KtTest : TestCase() {
     val input = """
+        467..114..
+        ...*......
+        ..35..633.
+        ......#...
+        617*......
+        .....+.58.
+        ..592.....
+        ......755.
+        ...${'$'}.*....
+        .664.598..
     """.trimIndent().lines()
 
     fun test1Day3() {
-        val ans = day3(input)
-        assertEquals(1, ans)
+        val ans = numbersConnectedToSymbol(input)
+        assertEquals(4361, ans)
     }
+
     fun test2Day3() {
-        val ans = day32(input)
-        assertEquals(0, ans)
+        val ans = startWith2Numbers(input)
+        assertEquals(467835, ans)
     }
 }

@@ -31,7 +31,7 @@ fun readLineByLine(fileName: String): List<String>{
     inputStream.bufferedReader().forEachLine { lineList.add(it) }
     return lineList
 }
-fun readGrid(fileName: String): MutableList<MutableList<Int>>{
+fun readIntGrid(fileName: String): MutableList<MutableList<Int>>{
     val input = readFileLines(fileName)
     val grid = mutableListOf<MutableList<Int>>()
     input.forEach { grid.add(it.map { it.digitToInt() }.toMutableList()) }

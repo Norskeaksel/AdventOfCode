@@ -1,13 +1,13 @@
 package days
 
-fun solve(input: List<String>): Int {
+fun day4(input: List<String>): Int {
     input.forEach { line ->
 
     }
     return 0
 }
 
-fun solve2(input: List<String>): Int {
+fun day42(input: List<String>): Int {
     input.forEach { line ->
 
     }
@@ -15,9 +15,9 @@ fun solve2(input: List<String>): Int {
 }
 
 fun main() {
-    val input = readFileLines("_2023/inputFiles/Day0")
+    val input = readFileLines("_2023/inputFiles/Day4")
     require(input.isNotEmpty()) { "Input file must not be empty" }
-    println(solve(input))
-    println(solve2(input))
+    println(day4(input))
+    println(day42(input))
 }
 
