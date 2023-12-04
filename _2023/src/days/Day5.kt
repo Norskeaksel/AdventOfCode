@@ -1,13 +1,13 @@
 package days
 
-fun solve(input: List<String>): Int {
+fun day5(input: List<String>): Int {
     input.forEach { line ->
 
     }
     return 0
 }
 
-fun solve2(input: List<String>): Int {
+fun day52(input: List<String>): Int {
     input.forEach { line ->
 
     }
