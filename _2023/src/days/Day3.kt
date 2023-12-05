@@ -43,7 +43,7 @@ private fun initializeGrid(input: List<String>, grid: Grid, padWithDuplicates:Bo
     }
 }
 
-fun startWith2Numbers(input: List<String>): Long {
+fun starWith2Numbers(input: List<String>): Long {
     val cleanedInput = mutableListOf<String>()
     input.forEach { line ->
         val newLine = line.map {
@@ -70,7 +70,7 @@ fun main() {
     val input = readFileLines("_2023/inputFiles/Day3")
     require(input.isNotEmpty()) { "Input file must not be empty" }
     println(numbersConnectedToSymbol(input))
-    println(startWith2Numbers(input))
+    println(starWith2Numbers(input))
 }
 
 class Grid(private val width: Int, private val height: Int) {

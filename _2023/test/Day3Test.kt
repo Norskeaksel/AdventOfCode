@@ -1,5 +1,5 @@
 import days.numbersConnectedToSymbol
-import days.startWith2Numbers
+import days.starWith2Numbers
 import junit.framework.TestCase
 
 class Day3KtTest : TestCase() {
@@ -22,7 +22,7 @@ class Day3KtTest : TestCase() {
     }
 
     fun test2Day3() {
-        val ans = startWith2Numbers(input)
+        val ans = starWith2Numbers(input)
         assertEquals(467835, ans)
     }
 }
