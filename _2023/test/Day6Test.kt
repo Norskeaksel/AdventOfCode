@@ -1,7 +1,5 @@
 import days.day6
 import days.day62
-import days.solve
-import days.solve2
 import junit.framework.TestCase
 
 class Day6KtTest : TestCase() {
