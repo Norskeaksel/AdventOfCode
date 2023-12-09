@@ -13,10 +13,10 @@ class Day7KtTest : TestCase() {
 
     fun test1Day7() {
         val ans = day7(input)
-        assertEquals(1, ans)
+        assertEquals(6440, ans)
     }
     fun test2Day7() {
         val ans = day72(input)
-        assertEquals(0, ans)
+        assertEquals(5905, ans)
     }
 }
