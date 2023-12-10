@@ -1,5 +1,5 @@
-import days.day6
-import days.day62
+import days.chargeVsSpeedRace
+import days.chargeVsSpeedRace2
 import junit.framework.TestCase
 
 class Day6KtTest : TestCase() {
@@ -9,11 +9,11 @@ class Day6KtTest : TestCase() {
     """.trimIndent().lines()
 
     fun test1Day0() {
-        val ans = day6(input)
+        val ans = chargeVsSpeedRace(input)
         assertEquals(288, ans)
     }
     fun test2Day0() {
-        val ans = day62(input)
+        val ans = chargeVsSpeedRace2(input)
         assertEquals(71503, ans)
     }
 }

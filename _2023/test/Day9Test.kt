@@ -1,5 +1,5 @@
-import days.day9
-import days.day92
+import days.sumOfDifferences
+import days.sumOfDiffrences2
 import junit.framework.TestCase
 
 class day9KtTest : TestCase() {
@@ -10,11 +10,11 @@ class day9KtTest : TestCase() {
     """.trimIndent().lines()
 
     fun test1day9() {
-        val ans = day9(input)
+        val ans = sumOfDifferences(input)
         assertEquals(114, ans)
     }
     fun test2day9() {
-        val ans = day92(input)
+        val ans = sumOfDiffrences2(input)
         assertEquals(2, ans)
     }
 }

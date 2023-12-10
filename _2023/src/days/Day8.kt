@@ -2,7 +2,7 @@ package days
 
 data class Crossroad(val left: String, val right: String)
 
-fun day8(input: List<String>): Int {
+fun rightLeftSteps(input: List<String>): Int {
     val instructions = input[0]
     val graph = mutableMapOf<String, Crossroad>()
     input.forEachIndexed { i, line ->
@@ -24,7 +24,7 @@ fun day8(input: List<String>): Int {
     return i
 }
 
-fun day82(input: List<String>): Long {
+fun rightLeftSteps2(input: List<String>): Long {
     val instructions = input[0]
     val graph = mutableMapOf<String, Crossroad>()
     val startNodes = mutableListOf<String>()
@@ -75,5 +75,5 @@ fun main() {
     val input = readFileLines("_2023/inputFiles/Day8")
     require(input.isNotEmpty()) { "Input file must not be empty" }
     //println(day8(input))
-    println(day82(input))
+    println(rightLeftSteps2(input))
 }

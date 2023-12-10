@@ -1,5 +1,5 @@
-import days.day7
-import days.day72
+import days.dessertPoker
+import days.dessertPoker2
 import junit.framework.TestCase
 
 class Day7KtTest : TestCase() {
@@ -12,11 +12,11 @@ class Day7KtTest : TestCase() {
     """.trimIndent().lines()
 
     fun test1Day7() {
-        val ans = day7(input)
+        val ans = dessertPoker(input)
         assertEquals(6440, ans)
     }
     fun test2Day7() {
-        val ans = day72(input)
+        val ans = dessertPoker2(input)
         assertEquals(5905, ans)
     }
 }

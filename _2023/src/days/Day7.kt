@@ -47,7 +47,7 @@ class Play(rawHand: String, bidString: String, part2:Boolean=false) : Comparable
     )
 }
 
-fun day7(input: List<String>): Long {
+fun dessertPoker(input: List<String>): Long {
     val plays = mutableListOf<Play>()
     input.forEach { line ->
         val (hand, bid) = line.split(" ")
@@ -61,7 +61,7 @@ fun day7(input: List<String>): Long {
     return winnings
 }
 
-fun day72(input: List<String>): Long {
+fun dessertPoker2(input: List<String>): Long {
     val plays = mutableListOf<Play>()
     input.forEach { line ->
         val (hand, bid) = line.split(" ")
@@ -78,7 +78,7 @@ fun day72(input: List<String>): Long {
 fun main() {
     val input = readFileLines("_2023/inputFiles/Day7")
     require(input.isNotEmpty()) { "Input file must not be empty" }
-    println(day7(input))
-    println(day72(input))
+    println(dessertPoker(input))
+    println(dessertPoker2(input))
 }
 

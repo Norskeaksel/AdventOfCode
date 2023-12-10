@@ -1,5 +1,5 @@
-import days.day8
-import days.day82
+import days.rightLeftSteps
+import days.rightLeftSteps2
 import junit.framework.TestCase
 
 class Day8KtTest : TestCase() {
@@ -24,9 +24,9 @@ ZZZ = (ZZZ, ZZZ)
     """.trimIndent().lines()
 
     fun test1day8() {
-        val ans = day8(input)
+        val ans = rightLeftSteps(input)
         assertEquals(2, ans)
-        val ans2 = day8(input2)
+        val ans2 = rightLeftSteps(input2)
         assertEquals(6, ans2)
     }
 
@@ -43,7 +43,7 @@ ZZZ = (ZZZ, ZZZ)
         XXX = (XXX, XXX)
     """.trimIndent().lines()
     fun test2day8() {
-        val ans = day82(input3)
+        val ans = rightLeftSteps2(input3)
         assertEquals(6, ans)
     }
 }
