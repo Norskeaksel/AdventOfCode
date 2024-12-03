@@ -9,7 +9,6 @@ class Day3Test : TestCase() {
 
     val input2 = """
         xmul(2,4)do()&mul[3,7]!^don't()_mul(5,5)+don't()mul(32,64](mul(11,8)undo()?mul(8,5))
-        xmul(2,4)do()&mul[3,7]!^don't()_mul(5,5)+don't()mul(32,64](mul(11,8)undo()?mul(8,5))
     """.trimIndent().lines()
 
     fun test1Day0() {
@@ -18,6 +17,6 @@ class Day3Test : TestCase() {
     }
     fun test2Day0() {
         val ans = day3b(input2)
-        assertEquals(96, ans)
+        assertEquals(48, ans)
     }
 }

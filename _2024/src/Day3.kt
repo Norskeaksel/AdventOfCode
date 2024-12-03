@@ -22,34 +22,22 @@ fun day3a(input: List<String>): Int {
 }
 
 fun day3b(input: List<String>): Int {
+    // Only works if input has size 1, meaning the puzzleinput has been edited 2 be on 1 line
     val input2 = mutableListOf<String>()
     input.forEach { line ->
-        print(line)
-        var newline = line
-        var dontPosition = line.indexOf("don't()")
-        while (dontPosition > -1) {
-            var doPosition = newline.indexOf("do()")
-            if(doPosition in 0..<dontPosition){
-                println("Remove $doPosition to ${doPosition + 4}")
-                newline = newline.removeRange(doPosition, doPosition + 4)
-                dontPosition = newline.indexOf("don't()")
-                continue
+        val sp = line.split("do")
+        var i = -1
+        while (++i < sp.size) {
+            if (!sp[i].contains("n't()")) {
+                input2.add(sp[i])
             }
-
-            if(doPosition < 0 )
-                doPosition = newline.length
-            println("Remove $dontPosition to $doPosition")
-            newline = newline.removeRange(dontPosition, doPosition)
-            dontPosition = newline.indexOf("don't()")
         }
-        println("adding $newline")
-        input2.add(newline)
     }
-    input2.forEach { println(it) }
     return day3a(input2)
 }
+
 fun main() {
-    val input = readFileLines("_2024/inputFiles/day3")
+    val input = readFileLines("/home/highruler/Dokumenter/Kotlin/AdventOfCode/_2024/inputFiles/Day3")
     require(input.isNotEmpty()) { "Input file must not be empty" }
     println(day3a(input))
     println(day3b(input))
