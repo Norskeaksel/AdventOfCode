@@ -10,11 +10,11 @@ class Day1Test : TestCase() {
         3   3
     """.trimIndent().lines()
 
-    fun test1Day0() {
+    fun test1() {
         val ans = day1a(input)
         assertEquals(11, ans)
     }
-    fun test2Day0() {
+    fun test2() {
         val ans = day1b(input)
         assertEquals(31, ans)
     }

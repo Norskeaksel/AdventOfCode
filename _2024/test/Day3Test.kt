@@ -11,11 +11,11 @@ class Day3Test : TestCase() {
         xmul(2,4)do()&mul[3,7]!^don't()_mul(5,5)+don't()mul(32,64](mul(11,8)undo()?mul(8,5))
     """.trimIndent().lines()
 
-    fun test1Day0() {
+    fun test1() {
         val ans = day3a(input)
         assertEquals(161, ans)
     }
-    fun test2Day0() {
+    fun test2() {
         val ans = day3b(input2)
         assertEquals(48, ans)
     }

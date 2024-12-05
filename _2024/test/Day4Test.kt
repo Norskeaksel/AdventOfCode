@@ -20,6 +20,6 @@ class Day4Test : TestCase() {
     }
     fun test2Day0() {
         val ans = day4b(input)
-        assertEquals(0, ans)
+        assertEquals(9, ans)
     }
 }
