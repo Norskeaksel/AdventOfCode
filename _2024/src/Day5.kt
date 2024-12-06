@@ -1,5 +1,8 @@
 package days
 
+import DFS
+import IntGraph
+
 fun day5a(input: List<String>): Int {
     val (rules, pageNumbers) = readInput(input)
     var ans = 0
@@ -23,14 +26,19 @@ fun List<Int>.isOrdered(rules: MutableMap<Int, MutableSet<Int>>): Boolean {
 
 fun day5b(input: List<String>): Int {
     val (rules, pageNumbers) = readInput(input)
-    var ans = 0
-    pageNumbers.forEach { list ->
-        if (list.isOrdered(rules))
-            return@forEach
-
-        ans += list[list.size / 2]
+    val graph = IntGraph()
+    rules.keys.forEach { key ->
+        for(dependency in rules[key]!!){
+            graph.addEdge(dependency, key)
+        }
     }
-    return ans
+    val dfs = DFS(graph.getAdjacencyList())
+    val topologicalOrder = mutableListOf<Int>()
+    for(i in graph.nodes()){
+        dfs.dfsIterative(i)
+        topologicalOrder.addAll(dfs.getCurrentVisited())
+    }
+    return 0
 }
 
 private fun readInput(input: List<String>): Pair<MutableMap<Int, MutableSet<Int>>, MutableList<List<Int>>> {

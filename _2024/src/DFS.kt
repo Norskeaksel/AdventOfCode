@@ -3,7 +3,6 @@ class DFS(val graph: AdjacencyList) {
     var visited = BooleanArray(size)
     var depth = 0
     private var currentVisited = mutableListOf<Int>()
-    private var processed = mutableListOf<Int>()
 
     fun dfsIterative(startId: Int) {
         currentVisited.clear()
@@ -29,8 +28,6 @@ class DFS(val graph: AdjacencyList) {
     fun dfsRecursive(start: Int) {
         currentVisited.clear()
         DeepRecursiveFunction<Int, Unit> { id ->
-            if(visited[id])
-                return@DeepRecursiveFunction
             visited[id] = true
             currentVisited.add(id)
             graph[id].forEach { (d, v) ->
@@ -38,19 +35,8 @@ class DFS(val graph: AdjacencyList) {
                     this.callRecursive(v)
                 }
             }
-            processed.add(id)
         }.invoke(start)
         depth = currentVisited.size
-    }
-
-    fun topologicalSort(): MutableList<Int> {
-        visited = BooleanArray(size)
-        val sortedGraph = mutableListOf<Int>()
-        for(i in 0 until size){
-            dfsRecursive(i)
-            sortedGraph.addAll(processed)
-        }
-        return sortedGraph
     }
     fun getCurrentVisited() = // Deep Copy
         currentVisited.map { it }.toList()
