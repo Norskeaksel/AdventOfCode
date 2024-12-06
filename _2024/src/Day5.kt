@@ -1,7 +1,7 @@
 package days
 
 import DFS
-import IntGraph
+import Graph
 
 fun day5a(input: List<String>): Int {
     val (rules, pageNumbers) = readInput(input)
@@ -26,19 +26,31 @@ fun List<Int>.isOrdered(rules: MutableMap<Int, MutableSet<Int>>): Boolean {
 
 fun day5b(input: List<String>): Int {
     val (rules, pageNumbers) = readInput(input)
-    val graph = IntGraph()
-    rules.keys.forEach { key ->
-        for(dependency in rules[key]!!){
-            graph.addEdge(dependency, key)
+    var ans = 0
+    pageNumbers.forEach { line ->
+        val graph = Graph()
+        line.forEach { node ->
+            rules[node]!!.forEach { dependency ->
+                graph.addEdge(node, dependency)
+            }
         }
+        graph.printNodeConnections()
+        // graph.printIdConnections()
+        // graph.printNodeConnections()
+        val dfs = DFS(graph.getAdjacencyList())
+        val sortedNodeIds = dfs.topologicalSort()
+        val sortedNodes = sortedNodeIds.map { graph.id2Node(it) as Int }
+        // println(sortedNodes.isOrdered(rules))
+        if (line.isOrdered(rules))
+            return@forEach
+        val commonNumbers = mutableListOf<Int>()
+        sortedNodes.forEach {
+            if (it in line)
+                commonNumbers.add(it)
+        }
+        ans += commonNumbers[commonNumbers.size / 2]
     }
-    val dfs = DFS(graph.getAdjacencyList())
-    val topologicalOrder = mutableListOf<Int>()
-    for(i in graph.nodes()){
-        dfs.dfsIterative(i)
-        topologicalOrder.addAll(dfs.getCurrentVisited())
-    }
-    return 0
+    return ans
 }
 
 private fun readInput(input: List<String>): Pair<MutableMap<Int, MutableSet<Int>>, MutableList<List<Int>>> {
