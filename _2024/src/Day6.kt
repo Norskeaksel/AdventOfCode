@@ -1,13 +1,14 @@
 import days.readFileLines
 
-var ans = 1
 fun day6a(grid: List<String>): Int {
+    var ans = 1
     var cx = -1
     var cy = -1
     var lineNr = -1
     var direction = Direction(0, -1)
+    var steps = 0
     grid.forEach { line ->
-        println(line)
+        // println(line)
         lineNr++
         if ('^' in line) {
             cy = lineNr
@@ -35,23 +36,52 @@ fun day6a(grid: List<String>): Int {
             cx = nx
             cy = ny
             val position = Direction(cx, cy)
-            if (position !in visited){
+            steps++
+            if (position !in visited) {
                 ans++
             }
             visited.add(position)
-            println("cx=$cx, cy=$cy, ans=$ans")
+            // println("cx=$cx, cy=$cy, ans=$ans")
+        }
+        if (steps > 10_000){
+            grid.forEach { line ->
+                // println(line)
+            }
+            return Int.MAX_VALUE
         }
     }
     return ans
 }
 
-fun day6b(input: List<String>): Int {
-    ans = 1
+fun day6b(grid: MutableList<String>): Int {
+    var newAns = 0
+    for (y in 0 until grid.size) {
+        for (x in 0 until grid[0].length) {
+            if (grid[y][x] == '#')
+                continue
+            var c = -1
+            val oldString = grid[y]
+            val newString = grid[y].map {
+                c++
+                if (c == x)
+                    '#'
+                else
+                    it
+            }.joinToString("")
+            grid[y] = newString
+            if(day6a(grid) == Int.MAX_VALUE){
+                newAns++
+                // println("y=$y,x=$x")
+            }
+            grid[y] = oldString
+        }
+    }
+    return newAns
 }
 
 fun main() {
     val grid = mutableListOf<String>()
-    val input = readFileLines("_2024/inputFiles/Day6").forEach { line ->
+    readFileLines("_2024/inputFiles/Day6").forEach { line ->
         grid.add(line)
     }
     println(day6a(grid))

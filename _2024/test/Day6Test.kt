@@ -1,6 +1,7 @@
 import junit.framework.TestCase
 
 class Day6Test : TestCase() {
+    val grid = mutableListOf<String>()
     val input = """
         ....#.....
         .........#
@@ -12,14 +13,19 @@ class Day6Test : TestCase() {
         ........#.
         #.........
         ......#...
-    """.trimIndent().lines()
+    """.trimIndent().lines().also {
+        it.forEach { line ->
+            grid.add(line)
+        }
+    }
 
     fun test1() {
-        val ans = day6a(input)
+        val ans = day6a(grid)
         assertEquals(41, ans)
     }
+
     fun test2() {
-        val ans = day6b(input)
+        val ans = day6b(grid)
         assertEquals(6, ans)
     }
 }
