@@ -67,12 +67,12 @@ class Day10Test : TestCase() {
         assertEquals(36, ans)
     }
     fun test2a(){
-        val ans = day10a(ex2a)
+        val ans = day10b(ex2a)
         assertEquals(3, ans)
     }
     fun test2b(){
-        val ans = day10a(ex2a)
-        assertEquals(227, ans)
+        val ans = day10b(ex2b)
+        assertEquals(13, ans)
     }
     fun test2() {
         val ans = day10b(input)
