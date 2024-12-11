@@ -1,5 +1,7 @@
 package days
 
+import java.math.BigInteger
+
 fun day9a(input: String): Long {
     val diskMap = makeIntDiskMap(input)
     println(diskMap)
@@ -88,8 +90,19 @@ fun lastDigitIndex(diskMap: List<Int>): Int {
     return -1
 }
 
-fun spaceRange(diskMap: List<String>, neededSpace: Int): IntRange? =
-    diskMap.joinToString("").indexOf(".".repeat(neededSpace)).let { if (it > -1) it until it + neededSpace else null }
+fun gapRange(diskMap: List<Int>, neededSpace: Int): IntRange? {
+    var gapCount = 0
+    for (i in diskMap.indices) {
+        if (diskMap[i] != -1)
+            gapCount = 0
+        else {
+            gapCount++
+            if (gapCount == neededSpace)
+                return i-neededSpace+1..i
+        }
+    }
+    return null
+}
 
 fun swapNumber(diskMap: List<String>, nrIndex: Int) {
 
@@ -103,35 +116,57 @@ fun checksum(diskMap: List<Int>): Long {
     return ans
 }
 
-fun day9b(input: String): Long {
-    val originalDiskMap = makeTrueDiskMap(input)
-    println(originalDiskMap)
-    val diskMap = originalDiskMap.toMutableList()
-    for (i in diskMap.indices.reversed()) {
-        if (i % 1000 == 0) {
-            println(i)
-        }
-        if (diskMap[i].first == -1)
-            continue
-        val neededSpace = diskMap[i].second
-        val spaceLocation = diskMap.indexOfFirst { it.first == -1 && it.second <= neededSpace }
-        if (spaceLocation == -1 || spaceLocation >= i)
-            continue
-        val leftOverSpace = diskMap[spaceLocation].second - neededSpace
-        diskMap[spaceLocation] = diskMap[i]
-        diskMap[i] = -1 to neededSpace
-        if (leftOverSpace > 0)
-            diskMap.add(spaceLocation + 1, -1 to leftOverSpace)
+fun bigChecksum(diskMap: List<Int>): BigInteger {
+    var ans = BigInteger.ZERO
+    diskMap.forEachIndexed { id, nr ->
+        ans = ans.plus(BigInteger.valueOf((id*nr).toLong()))
     }
-    println(diskMap)
-    //val finalDiskMap = .map { if (it == '.') 0 else it.digitToInt() }*/
-    return 0//checksum(finalDiskMap)
+    return ans
 }
 
-fun diskMap2String(diskMap: List<Pair<Int,Int>>){
+fun day9b(input: String): BigInteger {
+    val originalDiskMap = makeIntDiskMap(input)
+    println(originalDiskMap)
+    val diskMap = originalDiskMap.toMutableList()
+    var nonGapCount = 0
+    var currentId = diskMap.last()
+    for (i in diskMap.indices.reversed()) {
+        if(diskMap[i] == currentId){
+            nonGapCount++
+            continue
+        }
+        else {
+            if(currentId == -1){
+                currentId = diskMap[i]
+                continue
+            }
+            currentId = diskMap[i]
+            val gapRange = gapRange(diskMap, nonGapCount)
+            val fileRange = i+1..i+nonGapCount
+            if(gapRange==null || gapRange.last > fileRange.first){
+                nonGapCount=1
+                continue
+            }
+            for(j in gapRange){
+                diskMap[j] = diskMap[i+1]
+            }
+            for(j in fileRange){
+                diskMap[j] = -1
+            }
+            nonGapCount = 1
+            //println(diskMap)
+        }
+    }
+    //println(diskMap)
+    val finalDiskMap = diskMap.map { if(it == -1) 0 else it }
+    //println(finalDiskMap)
+    return bigChecksum(finalDiskMap)
+}
+
+fun diskMap2String(diskMap: List<Pair<Int, Int>>) {
     var s = ""
     diskMap.forEach {
-        repeat(it.second){
+        repeat(it.second) {
             //s+=it.first -
         }
     }
