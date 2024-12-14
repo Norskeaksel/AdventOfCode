@@ -46,6 +46,7 @@ class Grid(private val width: Int, private val height: Int) {
             if(t.x > 0 && t.y < height-1)       xy2Node(t.x - 1, t.y + 1) else null,
             if(t.x < width-1 && t.y < height-1) xy2Node(t.x + 1, t.y + 1) else null
         )
+    fun getNeighboursOfId(id:Int) = adjacencyList[id].map { id2Node(it.second)!! }
     // @formatter:on
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
