@@ -2,8 +2,9 @@ package days
 
 import DFS
 import Grid
+import kotlin.math.abs
 
-data class Region(val name: Char, var neighbours: Int = 0, var isCourner: Boolean = false)
+data class Region(val name: Char, var neighbours: Int = 0, var id:Int = -1)
 
 fun day12a(input: List<String>): Long {
     var ans = 0L
@@ -33,7 +34,7 @@ fun day12a(input: List<String>): Long {
             return@forEach
         val region = (t.data as Region).name
         val circumference = visitedNodes.sumOf { 4 - (grid.id2Node(it)!!.data as Region).neighbours }
-        println("Region $region has area $area and circumference $circumference")
+        //  println("Region $region has area $area and circumference $circumference")
         ans += area * circumference
     }
     return ans
@@ -58,6 +59,7 @@ fun day12b(input: List<String>): Long {
             }
         }
     }
+    var idCount = 0
     val dfs = DFS(grid.getAdjacencyList())
     grid.getNodes().forEach { t ->
         dfs.dfsRecursive(grid.node2Id(t))
@@ -65,28 +67,49 @@ fun day12b(input: List<String>): Long {
         val area = visitedNodes.size
         if (area == 0)
             return@forEach
+        visitedNodes.forEach {id ->
+            (grid.nodes[id].data as Region).id = idCount
+        }
+        idCount++
         val region = (t.data as Region).name
-        val corners = countCorners(visitedNodes, grid)
-        println("Region $region has area $area and $corners corners")
+        val circumference = visitedNodes.sumOf { 4 - (grid.id2Node(it)!!.data as Region).neighbours }
+        val corners = circumference - nodeEdgesCount(grid, (t.data as Region).id)
+        // println("Region $region has area $area, circumference $circumference and $corners corners")
         ans += area * corners
     }
     return ans
 }
 
-private fun countCorners(visitedNodes: List<Int>, grid: Grid): Int {
-    var corners = 0
-    visitedNodes.forEach { id ->
-        val neighbours = grid.getNeighboursOfId(id)
-        when (neighbours.size) {
-            0 -> corners += 4
-            1 -> corners += 2
-            2 -> if (neighbours.first().x != neighbours.last().x && neighbours.first().y != neighbours.last().y)
-                corners += 1
+fun nodeEdgesCount(grid: Grid, currentId: Int): Int {
+    var ans = 0
+    for (i in -1 until grid.height) {
+        for (j in -1 until grid.width) {
+            val square = mutableListOf<Int>()
+            for (dy in 0..1) {
+                for (dx in 0..1) {
+                    val y = i + dy
+                    val x = j + dx
+                    square.add((grid.xy2Node(x, y)?.data as Region?)?.id ?: -1)
+                }
+            }
 
-            else -> corners += 0
+            val (x1y1, x2y1, x1y2, x2y2) = square
+            // println("$x1y1$x2y1\n$x1y2$x2y2\n")
+            val edgeBelow =
+                x1y1 == currentId && x2y1 == currentId && x1y2 != currentId && x2y2 != currentId
+            val edgeAbove =
+                x1y2 == currentId && x2y2 == currentId && x1y1 != currentId && x2y1 != currentId
+            val edgeLeft =
+                x2y1 == currentId && x2y2 == currentId && x1y1 != currentId && x1y2 != currentId
+            val edgeRight =
+                x1y1 == currentId && x1y2 == currentId && x2y1 != currentId && x2y2 != currentId
+            if (edgeBelow || edgeAbove || edgeLeft || edgeRight) {
+                //if(currentRegion == 'B')
+                ans++
+            }
         }
     }
-    return corners
+    return ans
 }
 
 fun main() {
