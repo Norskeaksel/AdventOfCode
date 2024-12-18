@@ -1,38 +1,36 @@
 import days.readFileLines
 
-fun day18a(input: List<String>): Int {
-    val grid = Grid(7, 7)
-    grid.connectGrid(grid::getStraightNeighbours)
-    val corruptNodes = mutableListOf<Grid.Tile>()
+fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
+    val grid = Grid(gridSize, gridSize)
+    var c = 0
     input.forEach { line ->
+        if (c++ >= lineCount)
+            return@forEach
         val (x, y) = line.split(",").map { it.toInt() }
-        corruptNodes.add(grid.xy2Node(x, y)!!)
+        val corruptId = grid.xy2Id(x, y)!!
+        grid.nodes[corruptId] = null
     }
-    for (i in 0 until 1024) {
-        if (i >= corruptNodes.size)
-            break
-        val u = corruptNodes[i]
-        val neighbours = grid.getStraightNeighbours(u)
-        neighbours.forEach { v ->
-            // grid.removeEdge(v, u)
-        }
-    }
-    println(grid.getAdjacencyList())
+    grid.connectGrid(grid::getStraightNeighbours)
     val bfs = BFS(grid.getAdjacencyList())
     bfs.bfsIterative(listOf(0))
-    return bfs.distances[grid.xy2Id(grid.width-1, grid.height-1)!!].toInt()
+    val ans = bfs.distances[grid.xy2Id(gridSize - 1, gridSize - 1)!!].toInt()
+    return ans
 }
 
-fun day18b(input: List<String>): Int {
-    var ans = 0
+fun day18b(input: List<String>, gridSize: Int): String {
+    var c = 0
     input.forEach { line ->
+        val (x, y) = line.split(",").map { it.toInt() }
+        val dist = day18a(input, gridSize, ++c)
+        if (dist == -1)
+            return "$x,$y"
     }
-    return ans
+    return ""
 }
 
 fun main() {
     val input = readFileLines("_2024/inputFiles/Day18")
     require(input.isNotEmpty()) { "Input file must not be empty" }
-    println(day18a(input))
-    println(day18b(input))
+    println(day18a(input, 71, 1024))
+    println(day18b(input, 71))
 }

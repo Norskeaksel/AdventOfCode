@@ -3,17 +3,26 @@ class Grid(val width: Int, val height: Int) {
 
     private val size = width * height
     private val adjacencyList = adjacencyListInit(size)
-    val nodes = Array(size) { Tile(-1, -1) }
+    val nodes = Array<Tile?>(size) { Tile(-1, -1) }
+
+    init {
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                val id = x + y * width
+                nodes[id] = Tile(x, y)
+            }
+        }
+    }
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
     fun id2Node(id: Int) = if (id in 0 until size) nodes[id] else null
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
     fun node2Id(t: Tile) = t.x + t.y * width
-    fun getNodes(): List<Tile> = nodes.filter { it.x != -1 }
+    fun getNodes(): List<Tile> = nodes.filterNotNull().filter { it.x != -1 }
     fun getEdges(t: Tile): List<Edge> = adjacencyList[node2Id(t)]
     fun getAdjacencyList() = adjacencyList
-    fun size() = nodes.count { it.x != -1 }
+    fun trueSize() = nodes.filterNotNull().size
 
     fun addNode(t: Tile) {
         val id = node2Id(t)
@@ -26,7 +35,7 @@ class Grid(val width: Int, val height: Int) {
         adjacencyList[u].add(Edge(weight, v))
     }
 
-    fun removeEdge(t1: Tile, t2: Tile,weight: Double = 1.0){
+    fun removeEdge(t1: Tile, t2: Tile, weight: Double = 1.0) {
         val u = node2Id(t1)
         val v = node2Id(t2)
         adjacencyList[u].remove(Edge(weight, v))
@@ -59,7 +68,7 @@ class Grid(val width: Int, val height: Int) {
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
         for (x in 0 until width) {
             for (y in 0 until height) {
-                val currentTile = xy2Node(x, y)!!
+                val currentTile = xy2Node(x, y) ?: continue
                 val neighbours = getNeighbours(currentTile)
                 neighbours.forEach {
                     addEdge(xy2Node(x, y)!!, it)

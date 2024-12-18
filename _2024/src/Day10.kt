@@ -43,7 +43,7 @@ fun day10b(input: List<String>): Int {
     val (grid, targetIds) = buildGridAndIds(input)
     val dfs = DFS(grid.getAdjacencyList())
     val sortedGraph = dfs.topologicalSort()
-    val allPathsTo = IntArray(grid.size())
+    val allPathsTo = IntArray(grid.trueSize())
     sortedGraph.forEach { id ->
         if (grid.id2Node(id)!!.data != 0)
             return@forEach

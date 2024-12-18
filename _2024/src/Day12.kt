@@ -68,7 +68,7 @@ fun day12b(input: List<String>): Long {
         if (area == 0)
             return@forEach
         visitedNodes.forEach {id ->
-            (grid.nodes[id].data as Region).id = idCount
+            (grid.nodes[id]!!.data as Region).id = idCount
         }
         idCount++
         val region = (t.data as Region).name
