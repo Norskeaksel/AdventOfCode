@@ -104,7 +104,8 @@ fun nodeEdgesCount(grid: Grid, currentId: Int): Int {
             val edgeRight =
                 x1y1 == currentId && x1y2 == currentId && x2y1 != currentId && x2y2 != currentId
             if (edgeBelow || edgeAbove || edgeLeft || edgeRight) {
-                //if(currentRegion == 'B')
+                if(currentId == 1)
+                    println("$x1y1$x2y1\n$x1y2$x2y2\n")
                 ans++
             }
         }
