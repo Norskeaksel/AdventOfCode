@@ -46,13 +46,15 @@ class Grid(val width: Int, val height: Int) {
         addEdge(t2, t1, weight)
     }
 
-    fun getStraightNeighbours(t: Tile) =
-        listOfNotNull(
-            xy2Node(t.x - 1, t.y),
-            xy2Node(t.x + 1, t.y),
-            xy2Node(t.x, t.y - 1),
-            xy2Node(t.x, t.y + 1),
-        )
+    fun getStraightNeighbours(t: Tile?) =
+        t?.run {
+            listOfNotNull(
+                xy2Node(x - 1, y),
+                xy2Node(x + 1, y),
+                xy2Node(x, y - 1),
+                xy2Node(x, y + 1),
+            )
+        } ?: listOf()
 
     fun getDiagonalNeighbours(t: Tile) =
         listOfNotNull(
@@ -75,5 +77,14 @@ class Grid(val width: Int, val height: Int) {
                 }
             }
         }
+    }
+
+    fun printGrid() {
+        nodes.forEachIndexed { id, t ->
+            if (id > 0 && id % width == 0)
+                println()
+            print(t?.data)
+        }
+        println()
     }
 }
