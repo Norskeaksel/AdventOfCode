@@ -20,11 +20,7 @@ class Day20Test : TestCase() {
     """.trimIndent().lines()
 
     fun test1() {
-        val ans = day20a(input,40)
+        val ans = day20a(input,40, 84)
         assertEquals(2, ans)
-    }
-    fun test2() {
-        val ans = day0b(input)
-        assertEquals(0, ans)
     }
 }

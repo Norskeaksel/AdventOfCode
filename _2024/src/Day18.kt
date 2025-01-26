@@ -2,10 +2,11 @@ import days.readFileLines
 
 fun day18a(input: List<String>, gridSize: Int, lineCount: Int): Int {
     val grid = Grid(gridSize, gridSize)
-    var c = 0
-    input.forEach { line ->
-        if (c++ >= lineCount)
-            return@forEach
+    grid.print()
+    input.forEachIndexed { i, line ->
+        if (i >= lineCount)
+            return@forEachIndexed
+
         val (x, y) = line.split(",").map { it.toInt() }
         val corruptId = grid.xy2Id(x, y)!!
         grid.nodes[corruptId] = null

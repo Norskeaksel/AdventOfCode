@@ -8,9 +8,4 @@ class Day11Test : TestCase() {
         val ans = day11a(input)
         assertEquals(55312, ans)
     }
-
-    fun test2() {
-        val ans = day11b(zero)
-        assertEquals(0, ans)
-    }
 }

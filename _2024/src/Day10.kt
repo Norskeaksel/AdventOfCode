@@ -2,17 +2,25 @@ package days
 
 import DFS
 import Grid
+import Tile
 
 fun day10a(input: List<String>): Long {
     var ans = 0L
-    val (grid, targetIds) = buildGridAndIds(input)
+    val grid = Grid(input)
+    grid.print()
+    grid.getNodes().forEach { t ->
+        grid.getStraightNeighbours(t).forEach { n ->
+            if (n.data == t.data as Char + 1)
+                grid.addEdge(t, n)
+        }
+    }
     grid.getNodes().forEach {
-        val dfs = DFS(grid.getAdjacencyList())
-        if (it.data != 0)
+        val dfs = DFS(grid)
+        if (it.data != '0')
             return@forEach
         dfs.dfsRecursive(grid.node2Id(it))
-        val visitedTargets = dfs.getCurrentVisited().intersect(targetIds)
-        ans += visitedTargets.size
+        val visitedNines = dfs.getCurrentVisited().count { grid.id2Node(it)?.data == '9' }
+        ans += visitedNines
     }
     return ans
 }
@@ -22,7 +30,7 @@ private fun buildGridAndIds(input: List<String>): Pair<Grid, MutableSet<Int>> {
     val targetIds = mutableSetOf<Int>()
     input.forEachIndexed { y, line ->
         line.forEachIndexed { x, c ->
-            val t = Grid.Tile(x, y, c - '0')
+            val t = Tile(x, y, c - '0')
             grid.addNode(t)
             if (c == '9') {
                 targetIds.add(grid.node2Id(t))

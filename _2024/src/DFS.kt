@@ -1,4 +1,7 @@
 class DFS(val graph: AdjacencyList) {
+    constructor(grid: Grid) : this(grid.getAdjacencyList())
+
+
     val size = graph.size
     var visited = BooleanArray(size)
     var prossessed = mutableListOf<Int>()

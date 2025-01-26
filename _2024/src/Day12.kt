@@ -2,6 +2,7 @@ package days
 
 import DFS
 import Grid
+import Tile
 import kotlin.math.abs
 
 data class Region(val name: Char, var neighbours: Int = 0, var id:Int = -1)
@@ -12,7 +13,7 @@ fun day12a(input: List<String>): Long {
     input.forEachIndexed { y, line ->
         line.forEachIndexed { x, c ->
             val r = Region(c)
-            val t = Grid.Tile(x, y, r)
+            val t = Tile(x, y, r)
             grid.addNode(t)
         }
     }
@@ -46,7 +47,7 @@ fun day12b(input: List<String>): Long {
     input.forEachIndexed { y, line ->
         line.forEachIndexed { x, c ->
             val r = Region(c)
-            val t = Grid.Tile(x, y, r)
+            val t = Tile(x, y, r)
             grid.addNode(t)
         }
     }
