@@ -32,5 +32,5 @@ fun day20a(input: List<String>, cheatGoal:Int, fairTime:Int): Int {
 fun main() {
     val input = readFileLines("_2024/inputFiles/Day20")
     require(input.isNotEmpty()) { "Input file must not be empty" }
-    println(day20a(input, 100, 82))
+    println(day20a(input, 100, 9412))
 }
