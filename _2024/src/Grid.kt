@@ -1,3 +1,9 @@
+package graphClasses
+
+import Edge
+import adjacencyListInit
+import kotlin.math.abs
+
 data class Tile(val x: Int, val y: Int, var data: Any? = null)
 
 class Grid(val width: Int, val height: Int) {
@@ -27,6 +33,12 @@ class Grid(val width: Int, val height: Int) {
 
     fun xyInRange(x: Int, y: Int) = x in 0 until width && y in 0 until height
     fun xy2Id(x: Int, y: Int) = if (xyInRange(x, y)) x + y * width else null
+    fun id2xy(id: Int) =
+        if (id < 0 || id >= width * height)
+            error("id2xy: id out of bounds")
+        else
+            Pair(id % width, id / width)
+
     fun id2Node(id: Int) = if (id in 0 until size) nodes[id] else null
     fun ids2Nodes(ids: List<Int>) = ids.mapNotNull { id2Node(it) }
     fun xy2Node(x: Int, y: Int) = if (xyInRange(x, y)) id2Node(xy2Id(x, y)!!) else null
@@ -47,14 +59,17 @@ class Grid(val width: Int, val height: Int) {
         adjacencyList[u].add(Edge(weight, v))
     }
 
-    fun removeEdge(t1: Tile, t2: Tile, weight: Double = 1.0) {
-        val u = node2Id(t1)
-        val v = node2Id(t2)
-        adjacencyList[u].remove(Edge(weight, v))
+    fun removeEdge(id1: Int, id2: Int, weight: Double? = null) {
+        if (weight == null)
+            adjacencyList[id1].removeAll { it.second == id2 }
+        else
+            adjacencyList[id1].remove(Edge(weight, id2))
     }
 
-    fun removeEdge(id1: Int, id2: Int, weight: Double = 1.0) {
-        adjacencyList[id1].remove(Edge(weight, id2))
+    fun removeEdge(t1: Tile, t2: Tile, weight: Double? = null) {
+        val u = node2Id(t1)
+        val v = node2Id(t2)
+        removeEdge(u, v, weight)
     }
 
     fun connect(t1: Tile, t2: Tile, weight: Double = 1.0) {
@@ -85,9 +100,12 @@ class Grid(val width: Int, val height: Int) {
 
     fun getAllNeighbours(t: Tile) = getStraightNeighbours(t) + getDiagonalNeighbours(t)
 
-    fun removeCheatPath(path: List<Int>) {
-        val cheatPath = path.windowed(2).firstOrNull{(_,b) -> id2Node(b)!!.x > width / 2 }  ?: return
-        removeEdge(cheatPath.first(), cheatPath.last())
+    fun findPortals(path: List<Int>) =
+        path.windowed(2).firstOrNull { (a, b) -> id2Node(b) !in getStraightNeighbours(id2Node(a)) }
+
+    fun removeCheatPath(path: List<Int>, weight: Double = 1.0) {
+        val cheatPath = findPortals(path) ?: return
+        removeEdge(cheatPath.first(), cheatPath.last(), weight)
     }
 
     fun connectGrid(getNeighbours: (t: Tile) -> List<Tile>) {
@@ -108,6 +126,8 @@ class Grid(val width: Int, val height: Int) {
                 nodes[i] = null
         }
     }
+
+    fun manhattenDistance(t1: Tile, t2: Tile) = abs(t1.x - t2.x) + abs(t1.y - t2.y)
 
     fun print() {
         nodes.forEachIndexed { id, t ->

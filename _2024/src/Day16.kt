@@ -1,4 +1,5 @@
 import days.readFileLines
+import graphClasses.Dijkstra
 
 data class Node(val x: Int, val y: Int, val c: Char, val d: Char)
 
@@ -19,7 +20,7 @@ fun day16a(input: List<String>): Long {
     var ans = Double.MAX_VALUE
     endIds.forEach {
         // println(dijkstra.distance[it])
-        ans = dijkstra.distance[it].coerceAtMost(ans)
+        ans = dijkstra.distances[it].coerceAtMost(ans)
     }
     return ans.toLong()
 }
@@ -102,9 +103,9 @@ fun day16b(input: List<String>): Int {
         val currentToEnd = Dijkstra(graph.getAdjacencyList())
         startToCurrent.dijkstra(startId)
         currentToEnd.dijkstra(currentId)
-        val startToCurrentDist = startToCurrent.distance[currentId]
+        val startToCurrentDist = startToCurrent.distances[currentId]
         var currentToEndDist = Double.MAX_VALUE
-        endIds.forEach { currentToEndDist = currentToEnd.distance[it].coerceAtMost(currentToEndDist) }
+        endIds.forEach { currentToEndDist = currentToEnd.distances[it].coerceAtMost(currentToEndDist) }
         if (startToCurrentDist + currentToEndDist == optimalDistance) {
             optimalNodes.add(currentNode)
         }

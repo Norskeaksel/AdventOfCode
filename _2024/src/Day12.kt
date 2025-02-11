@@ -1,8 +1,8 @@
 package days
 
 import DFS
-import Grid
-import Tile
+import graphClasses.Grid
+import graphClasses.Tile
 import kotlin.math.abs
 
 data class Region(val name: Char, var neighbours: Int = 0, var id:Int = -1)

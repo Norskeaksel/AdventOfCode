@@ -1,8 +1,8 @@
 package days
 
 import DFS
-import Grid
-import Tile
+import graphClasses.Grid
+import graphClasses.Tile
 
 fun day10a(input: List<String>): Long {
     var ans = 0L

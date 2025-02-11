@@ -1,3 +1,5 @@
+import graphClasses.Grid
+
 class DFS(val graph: AdjacencyList) {
     constructor(grid: Grid) : this(grid.getAdjacencyList())
 
